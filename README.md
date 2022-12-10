@@ -1,15 +1,3 @@
-# flexible-yolov5
-
-
-<div align=center><img src="https://user-images.githubusercontent.com/9928596/191880047-a408e29c-4c6b-4e20-9318-0b23037ed64e.png" width="600" height="400"/></div>
-
-
-*Update the code for  [ultralytics/yolov5](https://github.com/ultralytics/yolov5) version 6.1.*
----
-代码基于U版YOLOv5  6.1版本. 根据 {backbone, neck, head} 重新组织了网络结构, 目前backbone 除了原始的YOLO外，还可选择 resnet, hrnet, swin-transformer, gnn, mobilenet 等主流backbone. 同时也可以自由的加入 SE, DCN, drop block 等插件. 可以很方便的对网络结构等进行替换、修改、实验. 同时提供了tensorrt 的c++、Python 推理, 量化. 以及Triton、tf_serving 部署代码. 每个backbone只选了一个训练300个epoch做对比，均无预训练权重，由于网络结构不同，我的结果并不能代表网络最终的结果，可以作为一个baseline参考. 这个项目适合想要各种改YOLO或者验证模块. 是如果你有什么好的idea，比如增加新的backbone, 插件等, 欢迎提PR, 使用时遇到什么问题, 也欢迎提issue. 如果对你有帮助, 感谢给颗♥(ˆ◡ˆԅ)小 ⭐️⭐️. 
----
-Split the yolov5 model to {backbone, neck, head} to facilitate the operation of various modules and support more backbones.Basically, only change the model, and I didn't change the architecture, training and testing of yolov5. Therefore, if the original code is updated, it is also very convenient to update this code. if you have some new ideas, you can give a pull request, add new features together。 if this repo can help you, please give me a star.
-
 ## Table of contents
 * [Features](#features)
 * [Notices](#Notices)
@@ -52,10 +40,6 @@ Split the yolov5 model to {backbone, neck, head} to facilitate the operation of 
 * resnet with dcn, training on gpu *RuntimeError: expected scalar type Half but found Float: please remove the mixed precision training in line 351 of scripts/train.py
 * swin-transformer, training is ok, but testing report *RuntimeError: expected object of scalar type Float but got scalar type Half for argument #2 'mat2' in call to_th_bmm_out in swin_trsansformer.py.   please set half=False in script/eval.py
 * mobilenet export onnx failed, please replace HardSigmoid() by others, because onnx don't support pytorch nn.threshold
-
-## Bugs
-
-None
 
 ## Prerequisites
 
@@ -151,29 +135,3 @@ For tensorrt model, you can direct use official trt export, and refer scripts/tr
 privode c++ / python demo, scripts/trt_infer
 
 
-
-## Reference
-
-* [ultralytics/yolov5](https://github.com/ultralytics/yolov5)
-* [EfficientNet-PyTorch](https://github.com/lukemelas/EfficientNet-PyTorch)
-* [Mobilenet v3](https://arxiv.org/abs/1905.02244)
-* [resnet](https://arxiv.org/abs/1512.03385)
-* [hrnet](https://arxiv.org/abs/1908.07919)
-* [shufflenet](https://arxiv.org/abs/1707.01083)
-* [swin transformer](https://github.com/SwinTransformer/Swin-Transformer-Object-Detection)
-* [dcn-v2](https://github.com/jinfagang/DCNv2_latest)
-* [coord_conv](https://github.com/mkocabas/CoordConv-pytorch)
-* [triton server](https://github.com/triton-inference-server/server)
-* [drop_block](https://github.com/miguelvr/dropblock)
-* [trt quan](https://github.com/Wulingtian/nanodet_tensorrt_int8_tools)
-* [repvgg](https://github.com/DingXiaoH/RepVGG)
-
-
-## &#8627; Contributors
-<a href="https://github.com/ultralytics/yolov5/graphs/contributors">
-   
-## &#8627; Stargazers
-[![Stargazers repo roster for @Bobo-y/flexible-yolov5](https://reporoster.com/stars/Bobo-y/flexible-yolov5)](https://github.com/Bobo-y/flexible-yolov5/stargazers)
-
-## &#8627; Forkers
-[![Forkers repo roster for @Bobo-y/flexible-yolov5](https://reporoster.com/forks/Bobo-y/flexible-yolov5)](https://github.com/Bobo-y/flexible-yolov5/network/members)
